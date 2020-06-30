@@ -77,7 +77,7 @@ public class Variables {
     public static int screen_height=0;
     public static int screen_width=0;
 
-    
+
 
     public static String default_lat ="40.6976701";
     public static String default_lon ="-74.2598737";

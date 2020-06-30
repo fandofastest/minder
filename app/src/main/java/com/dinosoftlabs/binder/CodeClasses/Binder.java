@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import androidx.multidex.MultiDex;
 
+import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,6 +19,7 @@ public class Binder extends Application {
         super.onCreate();
         FirebaseApp.initializeApp(this);
         Fresco.initialize(this);
+        AudienceNetworkAds.initialize(this);
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
     }

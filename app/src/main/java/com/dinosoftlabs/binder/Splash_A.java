@@ -20,14 +20,20 @@ import androidx.core.content.ContextCompat;
 
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.dinosoftlabs.binder.Accounts.Enable_location_A;
 import com.dinosoftlabs.binder.Accounts.Login_A;
 import com.dinosoftlabs.binder.CodeClasses.Variables;
 import com.dinosoftlabs.binder.Main_Menu.MainMenuActivity;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -40,7 +46,8 @@ import java.util.Locale;
 
 public class Splash_A extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
-
+     final String TAG = Splash_A.class.getSimpleName();
+     InterstitialAd interstitialAd;
     SharedPreferences sharedPreferences;
 
     Handler max_handler;
@@ -66,66 +73,107 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
         }
 
 
+        Button startbutton= findViewById(R.id.startbutt);
+        startbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (sharedPreferences.getBoolean(Variables.islogin, false)) {
+                    // if user is already login then we get the current location of user
+                    if(getIntent().hasExtra("action_type")){
+                        Intent intent= new Intent(Splash_A.this, MainMenuActivity.class);
+                        String action_type=getIntent().getExtras().getString("action_type");
+                        String receiverid=getIntent().getExtras().getString("senderid");
+                        String title=getIntent().getExtras().getString("title");
+                        String icon=getIntent().getExtras().getString("icon");
+
+                        intent.putExtra("icon",icon);
+                        intent.putExtra("action_type",action_type);
+                        intent.putExtra("receiverid",receiverid);
+                        intent.putExtra("title",title);
+
+                        showinters();
+
+//                        startActivity(intent);
+//                        finish();
+                    }
+                    else
+                        showinters();
+
+//                    GPSStatus();
+
+                } else {
+                    showinters();
+                    // else we will move the user to login screen
+//                    startActivity(new Intent(Splash_A.this, Login_A.class));
+//                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//                    finish();
+
+                }
+
+            }
+        });
+
         sharedPreferences=getSharedPreferences(Variables.pref_name,MODE_PRIVATE);
 
             // here we check the user is already login or not
-        new Handler().postDelayed(new Runnable() {
-                public void run() {
-
-                    if (sharedPreferences.getBoolean(Variables.islogin, false)) {
-                        // if user is already login then we get the current location of user
-                        if(getIntent().hasExtra("action_type")){
-                            Intent intent= new Intent(Splash_A.this, MainMenuActivity.class);
-                            String action_type=getIntent().getExtras().getString("action_type");
-                            String receiverid=getIntent().getExtras().getString("senderid");
-                            String title=getIntent().getExtras().getString("title");
-                            String icon=getIntent().getExtras().getString("icon");
-
-                            intent.putExtra("icon",icon);
-                            intent.putExtra("action_type",action_type);
-                            intent.putExtra("receiverid",receiverid);
-                            intent.putExtra("title",title);
-
-
-                            startActivity(intent);
-                            finish();
-                        }
-                        else
-                        GPSStatus();
-
-                    } else {
-
-                        // else we will move the user to login screen
-                        startActivity(new Intent(Splash_A.this, Login_A.class));
-                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-                        finish();
-
-                    }
-                }
-            }, 2000);
+//        new Handler().postDelayed(new Runnable() {
+//                public void run() {
+//
+//                    if (sharedPreferences.getBoolean(Variables.islogin, false)) {
+//                        // if user is already login then we get the current location of user
+//                        if(getIntent().hasExtra("action_type")){
+//                            Intent intent= new Intent(Splash_A.this, MainMenuActivity.class);
+//                            String action_type=getIntent().getExtras().getString("action_type");
+//                            String receiverid=getIntent().getExtras().getString("senderid");
+//                            String title=getIntent().getExtras().getString("title");
+//                            String icon=getIntent().getExtras().getString("icon");
+//
+//                            intent.putExtra("icon",icon);
+//                            intent.putExtra("action_type",action_type);
+//                            intent.putExtra("receiverid",receiverid);
+//                            intent.putExtra("title",title);
+//
+//
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                        else
+//                        GPSStatus();
+//
+//                    } else {
+//
+//                        // else we will move the user to login screen
+//                        startActivity(new Intent(Splash_A.this, Login_A.class));
+//                        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//                        finish();
+//
+//                    }
+//                }
+//            }, 2000);
 
         Get_screen_size();
 
         set_language_local();
 
-        max_handler=new Handler();
-        max_runable=new Runnable() {
-            @Override
-            public void run() {
-
-                if (sharedPreferences.getString(Variables.current_Lat, "").equals("") || sharedPreferences.getString(Variables.current_Lon, "").equals("")) {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(Variables.current_Lat, Variables.default_lat);
-                    editor.putString(Variables.current_Lon, Variables.default_lon);
-                    editor.commit();
-                }
-
-                startActivity(new Intent(Splash_A.this, MainMenuActivity.class));
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-                finish();
-            }
-        };
-        max_handler.postDelayed(max_runable,15000);
+//        max_handler=new Handler();
+//        max_runable=new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                if (sharedPreferences.getString(Variables.current_Lat, "").equals("") || sharedPreferences.getString(Variables.current_Lon, "").equals("")) {
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString(Variables.current_Lat, Variables.default_lat);
+//                    editor.putString(Variables.current_Lon, Variables.default_lon);
+//                    editor.commit();
+//                }
+//
+//                startActivity(new Intent(Splash_A.this, MainMenuActivity.class));
+//                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//                finish();
+//            }
+//        };
+//        max_handler.postDelayed(max_runable,15000);
     }
 
 
@@ -351,6 +399,60 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
     public void onConnectionSuspended(int arg0) {
         mGoogleApiClient.connect();
     }
+
+
+
+
+    public  void showinters(){
+
+        interstitialAd = new InterstitialAd(this, "710838069700517_710862156364775");
+        // Set listeners for the Interstitial Ad
+        interstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+                // Interstitial ad displayed callback
+                Log.e(TAG, "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                // Interstitial dismissed callback
+                Log.e(TAG, "Interstitial ad dismissed.");
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d(TAG, "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d(TAG, "Interstitial ad impression logged!");
+            }
+        });
+
+        // For auto play video ads, it's recommended to load the ad
+        // at least 30 seconds before it is shown
+        interstitialAd.loadAd();
+    }
+
+
 
 
 
