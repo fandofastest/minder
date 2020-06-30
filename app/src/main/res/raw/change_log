@@ -1,0 +1,32 @@
+AndroidMenifest.xml
+
+Now we are fetching the user image from our server instead of firebase.
+
+so where ever in the app a user images is show you have to go to their respected java call and change the link their.
+
+we are also telling you which files has been changed.
+com.dinosoftlabs.binder >> Accounts >> Get_User_Info_A.java
+com.dinosoftlabs.binder >> Accounts >> Login_A.java
+
+com.dinosoftlabs.binder >> Inbox >> Inbox_Adapter.java
+com.dinosoftlabs.binder >> Inbox >> Inbox_F.java
+com.dinosoftlabs.binder >> Inbox >> Matches_Adapter.java
+
+
+com.dinosoftlabs.binder >> Match >> Match_F.java
+
+com.dinosoftlabs.binder >> Profile >> EditProfile >> EditProfile_F.java
+com.dinosoftlabs.binder >> Profile >> EditProfile >> Profile_photos_Adapter.java
+com.dinosoftlabs.binder >> Profile >> Profile_F.java
+
+
+com.dinosoftlabs.binder >> Users >> Images_sliding_adapter.java
+com.dinosoftlabs.binder >> Users >> User_Adapter.java
+
+com.dinosoftlabs.binder >> UsersLikes >> User_Like_Adapter.java
+com.dinosoftlabs.binder >> Inbox >> Matches_Adapter.java
+
+com.dinosoftlabs.binder >> Video_Calling >> VideoActivity.java
+
+com.dinosoftlabs.binder >>  See_Full_Image_F.java
+

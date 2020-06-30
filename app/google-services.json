@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "218970963081",
+    "firebase_url": "https://hotmovies-7c8cc.firebaseio.com",
+    "project_id": "hotmovies-7c8cc",
+    "storage_bucket": "hotmovies-7c8cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218970963081:android:5abb9a43e8a89349e59a58",
+        "android_client_info": {
+          "package_name": "com.inmassage.inmessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218970963081-qhek5icsq9plel2k1orkbouab5rf21v2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2tIGTs8gvA3Tsmj-2Mucie93EB3j-fPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218970963081-qhek5icsq9plel2k1orkbouab5rf21v2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
