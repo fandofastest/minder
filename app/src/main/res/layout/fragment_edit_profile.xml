@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:clickable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Profile.EditProfile.EditProfile_F">
+    tools:context="com.indosoft.binder.Profile.EditProfile.EditProfile_F">
 
     <RelativeLayout
         android:layout_width="match_parent"

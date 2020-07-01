@@ -1,4 +1,4 @@
-package com.dinosoftlabs.com.Anonymousmessaging.Chat;
+package com.indosoft.com.Anonymousmessaging.Chat;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dinosoftlabs.com.Anonymousmessaging.R;
+import com.indosoft.com.Anonymousmessaging.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet> mDataSet;
+    private List<com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet> mDataSet;
     String myID;
     private static final int mychat = 1;
     private static final int friendchat = 2;
@@ -33,15 +33,15 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     Integer today_day=0;
 
-    private com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener listener;
-    private com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener;
+    private com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener listener;
+    private com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener;
 
     public interface OnItemClickListener {
-        void onItemClick(com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item, View view);
+        void onItemClick(com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item, View view);
     }
 
     public interface OnLongClickListener {
-        void onLongclick (com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item, View view);
+        void onLongclick (com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item, View view);
     }
 
     /**
@@ -51,7 +51,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      *      Device id
      */
 
-    ChatAdapter(List<com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet> dataSet, String id, Context context, com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener listener, com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener) {
+    ChatAdapter(List<com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet> dataSet, String id, Context context, com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener listener, com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener) {
         mDataSet = dataSet;
         this.myID=id;
         this.context=context;
@@ -101,7 +101,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet chat = mDataSet.get(position);
+        com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet chat = mDataSet.get(position);
         if(chat.getType().equals("text")){
             Chatviewholder chatviewholder=(Chatviewholder) holder;
         // check if the message is from sender or receiver
@@ -114,7 +114,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // make the group of message by date set the gap of 1 min
         // means message send with in 1 min will show as a group
         if (position != 0) {
-            com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet chat2 = mDataSet.get(position - 1);
+            com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet chat2 = mDataSet.get(position - 1);
             if (chat2.getTimestamp().substring(14, 16).equals(chat.getTimestamp().substring(14, 16))) {
                 chatviewholder.datetxt.setVisibility(View.GONE);
             } else {
@@ -144,7 +144,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             // make the group of message by date set the gap of 1 min
             // means message send with in 1 min will show as a group
             if (position != 0) {
-                com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet chat2 = mDataSet.get(position - 1);
+                com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet chat2 = mDataSet.get(position - 1);
                 if (chat2.getTimestamp().substring(14, 16).equals(chat.getTimestamp().substring(14, 16))) {
                     chatimageholder.datetxt.setVisibility(View.GONE);
                 } else {
@@ -170,7 +170,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             alertviewholder.message.setText( "This message is deleted by "+chat.getSender_name());
 
             if (position != 0) {
-                com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet chat2 = mDataSet.get(position - 1);
+                com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet chat2 = mDataSet.get(position - 1);
                 if (chat2.getTimestamp().substring(11, 13).equals(chat.getTimestamp().substring(11, 13))) {
                     alertviewholder.datetxt.setVisibility(View.GONE);
                 } else {
@@ -222,7 +222,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             message_seen=view.findViewById(R.id.message_seen);
         }
 
-        public void bind(final com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item, final com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener) {
+        public void bind(final com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item, final com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener) {
             message.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -245,7 +245,7 @@ class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             message_seen=view.findViewById(R.id.message_seen);
         }
 
-        public void bind(final com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item, final com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener listener, final com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener) {
+        public void bind(final com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item, final com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener listener, final com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener long_listener) {
 
             chatimage.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -4,7 +4,7 @@
     android:layout_height="64dp"
     android:gravity="center">
 
-    <com.dinosoftlabs.binder.Chat.RoundCornersImageView
+    <com.indosoft.binder.Chat.RoundCornersImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/gif_image"

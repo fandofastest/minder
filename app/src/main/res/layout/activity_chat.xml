@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:clickable="true"
     android:id="@+id/Chat_F"
-    tools:context="com.dinosoftlabs.binder.Chat.Chat_Activity">
+    tools:context="com.indosoft.binder.Chat.Chat_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"

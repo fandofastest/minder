@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Binder</string>
+    <string name="app_name">Minder - Free Dating Apps</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
@@ -11,9 +11,6 @@
     <string name="fb_login_protocol_scheme">fb(fb_app_id)</string>
    
 
-
-    <string name="admob_appid" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="my_Interstitial_Add" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
 
 
    

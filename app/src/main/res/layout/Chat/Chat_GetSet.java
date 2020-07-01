@@ -1,4 +1,4 @@
-package com.dinosoftlabs.com.Anonymousmessaging.Chat;
+package com.indosoft.com.Anonymousmessaging.Chat;
 
 /**
  * Created by AQEEL on 3/20/2018.

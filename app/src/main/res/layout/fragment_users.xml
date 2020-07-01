@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Users.Users_F">
+    tools:context="com.indosoft.binder.Users.Users_F">
 
 
     <RelativeLayout

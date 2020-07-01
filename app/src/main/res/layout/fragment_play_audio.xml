@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    tools:context="com.dinosoftlabs.binder.Chat.Audio.Play_Audio_F">
+    tools:context="com.indosoft.binder.Chat.Audio.Play_Audio_F">
 
 
     <RelativeLayout

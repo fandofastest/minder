@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_lay"
     android:background="@android:color/white"
-    tools:context="com.dinosoftlabs.binder.GoogleMap.MapsActivity">
+    tools:context="com.indosoft.binder.GoogleMap.MapsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

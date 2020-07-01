@@ -5,7 +5,7 @@
     android:id="@+id/MainMenuFragment"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Main_Menu.MainMenuFragment">
+    tools:context="com.indosoft.binder.Main_Menu.MainMenuFragment">
 
 
           <RelativeLayout
@@ -76,7 +76,7 @@
                                       android:scaleType="fitCenter"
                                       android:padding="3dp"
                                       android:id="@+id/binder_btn"
-                                      android:src="@drawable/ic_binder_color"
+                                      android:src="@drawable/icon"
                                       android:background="@color/transparent"/>
 
                               </LinearLayout>
@@ -129,7 +129,7 @@
               </androidx.cardview.widget.CardView>
 
 
-              <com.dinosoftlabs.binder.Main_Menu.Custom_ViewPager
+              <com.indosoft.binder.Main_Menu.Custom_ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

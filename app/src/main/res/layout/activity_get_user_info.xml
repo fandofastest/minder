@@ -6,7 +6,7 @@ android:layout_height="match_parent"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 android:background="@color/light_white"
 android:id="@+id/Get_Info_F"
-tools:context="com.dinosoftlabs.binder.Accounts.Get_User_Info_A">
+tools:context="com.indosoft.binder.Accounts.Get_User_Info_A">
 
 <RelativeLayout
     android:layout_width="match_parent"

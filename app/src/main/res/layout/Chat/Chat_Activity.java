@@ -1,4 +1,4 @@
-package com.dinosoftlabs.com.Anonymousmessaging.Chat;
+package com.indosoft.com.Anonymousmessaging.Chat;
 
 import android.Manifest;
 import android.content.Context;
@@ -33,10 +33,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dinosoftlabs.com.Anonymousmessaging.Main_Menu.RelateToFragment_OnBack.RootFragment;
-import com.dinosoftlabs.com.Anonymousmessaging.Peoples.AllPeople_GetSet;
-import com.dinosoftlabs.com.Anonymousmessaging.R;
-import com.dinosoftlabs.com.Anonymousmessaging.See_Full_Image_F;
+import com.indosoft.com.Anonymousmessaging.Main_Menu.RelateToFragment_OnBack.RootFragment;
+import com.indosoft.com.Anonymousmessaging.Peoples.AllPeople_GetSet;
+import com.indosoft.com.Anonymousmessaging.R;
+import com.indosoft.com.Anonymousmessaging.See_Full_Image_F;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -82,8 +82,8 @@ public class Chat_Activity extends RootFragment {
 
     RecyclerView chatrecyclerview;
     TextView user_name;
-    private List<com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet> mChats=new ArrayList<>();
-    com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter mAdapter;
+    private List<com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet> mChats=new ArrayList<>();
+    com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter mAdapter;
     ProgressBar p_bar;
 
     Query query_getchat;
@@ -135,15 +135,15 @@ public class Chat_Activity extends RootFragment {
         layout.setStackFromEnd(true);
         chatrecyclerview.setLayoutManager(layout);
         chatrecyclerview.setHasFixedSize(false);
-        mAdapter = new com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter(mChats, senderid, context, new com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener() {
+        mAdapter = new com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter(mChats, senderid, context, new com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item, View view) {
+            public void onItemClick(com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item, View view) {
 
                    OpenfullsizeImage(item);
             }
-        } ,new com.dinosoftlabs.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener() {
+        } ,new com.indosoft.com.Anonymousmessaging.Chat.ChatAdapter.OnLongClickListener() {
             @Override
-            public void onLongclick(com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item, View view) {
+            public void onLongclick(com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item, View view) {
                 if (view.getId() == R.id.msgtxt) {
                     if(senderid.equals(item.getSender_id()) && istodaymessage(item.getTimestamp()))
                     delete_Message(item);
@@ -244,7 +244,7 @@ public class Chat_Activity extends RootFragment {
       @Override
       public void onChildAdded(DataSnapshot dataSnapshot, String s) {
              try {
-                 com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet model = dataSnapshot.getValue(com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet.class);
+                 com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet model = dataSnapshot.getValue(com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet.class);
                  mChats.add(model);
                  mAdapter.notifyDataSetChanged();
                  chatrecyclerview.scrollToPosition(mChats.size() - 1);
@@ -262,7 +262,7 @@ public class Chat_Activity extends RootFragment {
          if (dataSnapshot != null && dataSnapshot.getValue() != null) {
 
              try {
-                 com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet model = dataSnapshot.getValue(com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet.class);
+                 com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet model = dataSnapshot.getValue(com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet.class);
 
                  for (int i=mChats.size()-1;i>=0;i--){
                      if(mChats.get(i).getTimestamp().equals(dataSnapshot.child("timestamp").getValue())){
@@ -549,7 +549,7 @@ public class Chat_Activity extends RootFragment {
 
 
 
-    private void delete_Message(final com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet chat_getSet) {
+    private void delete_Message(final com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet chat_getSet) {
 
         final CharSequence[] options = { "Delete this message","Cancel" };
 
@@ -586,7 +586,7 @@ public class Chat_Activity extends RootFragment {
     }
 
 
-    public void update_message(com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item){
+    public void update_message(com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item){
         final String current_user_ref = "chat" + "/" + senderid + "-" + Receiverid;
         final String chat_user_ref = "chat" + "/" + Receiverid + "-" + senderid;
 
@@ -956,7 +956,7 @@ public class Chat_Activity extends RootFragment {
     }
 
     //this method will big the size of image in private chat
-    public void OpenfullsizeImage(com.dinosoftlabs.com.Anonymousmessaging.Chat.Chat_GetSet item){
+    public void OpenfullsizeImage(com.indosoft.com.Anonymousmessaging.Chat.Chat_GetSet item){
         See_Full_Image_F see_image_f = new See_Full_Image_F();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);

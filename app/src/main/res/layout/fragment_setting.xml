@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Settings.Setting_F">
+    tools:context="com.indosoft.binder.Settings.Setting_F">
 
     <RelativeLayout
         android:layout_width="match_parent"

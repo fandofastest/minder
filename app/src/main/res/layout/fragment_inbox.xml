@@ -5,7 +5,7 @@
     android:background="@color/light_white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Inbox.Inbox_F">
+    tools:context="com.indosoft.binder.Inbox.Inbox_F">
 
     <LinearLayout
         android:layout_width="match_parent"

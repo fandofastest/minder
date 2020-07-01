@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:theme="@style/theme_popup"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Users.User_detail_F">
+    tools:context="com.indosoft.binder.Users.User_detail_F">
 
 
     <ScrollView

@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:keepScreenOn="true"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Video_Calling.VideoActivity">
+    tools:context="com.indosoft.binder.Video_Calling.VideoActivity">
 
     <include layout="@layout/content_video" />
 

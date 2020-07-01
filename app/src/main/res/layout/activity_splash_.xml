@@ -4,17 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/Splash_A"
-    tools:context="com.dinosoftlabs.binder.Splash_A">
+    tools:context="com.indosoft.binder.Splash_A">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splash_screen"
+        android:src="@drawable/splash"
         android:scaleType="centerCrop"/>
 
     <Button
-        android:layout_gravity="bottom"
+        android:layout_marginTop="170sp"
+        android:layout_gravity="center_vertical"
         android:text="Start"
+        android:textSize="20sp"
+        android:background="@color/light_purple_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/startbutt"/>

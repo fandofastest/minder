@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:id="@+id/Login_Phone_A"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.dinosoftlabs.binder.Accounts.Login_Phone_A">
+    tools:context="com.indosoft.binder.Accounts.Login_Phone_A">
 
     <ViewFlipper
         android:layout_width="match_parent"

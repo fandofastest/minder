@@ -1,4 +1,4 @@
-package com.dinosoftlabs.com.Anonymousmessaging.Chat;
+package com.indosoft.com.Anonymousmessaging.Chat;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
