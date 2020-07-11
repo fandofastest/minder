@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.indosoft.binder.Chat.Chat_Activity;
 import com.indosoft.binder.CodeClasses.ApiRequest;
 import com.indosoft.binder.CodeClasses.Variables;
@@ -45,6 +48,9 @@ import java.util.Objects;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.indosoft.binder.Splash_A.admobappid;
+import static com.indosoft.binder.Splash_A.interadmob;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -65,6 +71,7 @@ public class Match_F extends RootFragment {
 
     LinearLayout send_message_layout;
     Match_Get_Set item;
+    com.google.android.gms.ads.InterstitialAd mInterstitialAd;
 
     DatabaseReference rootref;
 
@@ -231,7 +238,7 @@ public class Match_F extends RootFragment {
         pDialog.setCancelable(false);
         pDialog.show();
 
-        interstitialAd = new InterstitialAd(Objects.requireNonNull(getContext()), Splash_A.inter);
+        interstitialAd = new InterstitialAd(Objects.requireNonNull(getContext()), Splash_A.interfb);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
             @Override
@@ -249,8 +256,7 @@ public class Match_F extends RootFragment {
 
             @Override
             public void onError(Ad ad, AdError adError) {
-                pDialog.hide();
-                chatFragment(MainMenuActivity.user_id,item.getU_id(),item.getUsername(),item.getPicture());
+             interadmobload();
 
                 // Ad error callback
                 Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
@@ -280,6 +286,53 @@ public class Match_F extends RootFragment {
         // For auto play video ads, it's recommended to load the ad
         // at least 30 seconds before it is shown
         interstitialAd.loadAd();
+    }
+    public  void interadmobload(){
+        MobileAds.initialize(context,
+                admobappid);
+        mInterstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
+        mInterstitialAd.setAdUnitId(interadmob);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mInterstitialAd.show();
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+
+                pDialog.hide();
+                chatFragment(MainMenuActivity.user_id,item.getU_id(),item.getUsername(),item.getPicture());
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+
+                pDialog.hide();
+                chatFragment(MainMenuActivity.user_id,item.getU_id(),item.getUsername(),item.getPicture());
+                // Code to be executed when the interstitial ad is closed.
+            }
+        });
+
+
     }
 
 

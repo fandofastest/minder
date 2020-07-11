@@ -32,13 +32,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.indosoft.binder.Accounts.Enable_location_A;
 import com.indosoft.binder.Accounts.Login_A;
 import com.indosoft.binder.CodeClasses.Variables;
 import com.indosoft.binder.Main_Menu.MainMenuActivity;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -47,6 +49,10 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.ads.AdRequest;
+import com.facebook.ads.InterstitialAd;
+
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,8 +64,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class Splash_A extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
      final String TAG = Splash_A.class.getSimpleName();
-    public static String statususer,banner,inter,statusapp,apkupdate;
-
+    public static String statususer,bannerfb,interfb,statusapp,apkupdate,interadmob,banneradmob,admobappid;
+    com.google.android.gms.ads.InterstitialAd mInterstitialAd;
     InterstitialAd interstitialAd;
     SharedPreferences sharedPreferences;
     SweetAlertDialog pDialog;
@@ -405,7 +411,7 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
         pDialog.show();
 
 
-        interstitialAd = new InterstitialAd(this, inter);
+        interstitialAd = new InterstitialAd(this, interfb);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
             @Override
@@ -443,6 +449,7 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
                     // else we will move the user to login screen
                     Intent intent= new Intent(Splash_A.this, Login_A.class);
                     overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                    startActivity(intent);
                     finish();
 
                 }
@@ -452,38 +459,7 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
 
             @Override
             public void onError(Ad ad, AdError adError) {
-                pDialog.hide();
-
-                if (sharedPreferences.getBoolean(Variables.islogin, false)) {
-                    // if user is already login then we get the current location of user
-                    if(getIntent().hasExtra("action_type")){
-                        Intent intent= new Intent(Splash_A.this, MainMenuActivity.class);
-                        String action_type=getIntent().getExtras().getString("action_type");
-                        String receiverid=getIntent().getExtras().getString("senderid");
-                        String title=getIntent().getExtras().getString("title");
-                        String icon=getIntent().getExtras().getString("icon");
-
-                        intent.putExtra("icon",icon);
-                        intent.putExtra("action_type",action_type);
-                        intent.putExtra("receiverid",receiverid);
-                        intent.putExtra("title",title);
-
-
-                        startActivity(intent);
-                        finish();
-                    }
-                    else
-
-                    GPSStatus();
-
-                } else {
-                    // else we will move the user to login screen
-                    Intent intent= new Intent(Splash_A.this, Login_A.class);
-                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-                    finish();
-
-                }
-
+               interadmobload();
 
                 // Ad error callback
                 Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
@@ -528,10 +504,15 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
                 try {
 //                    JSONObject jsonObject=response.getJSONObject("status");
                     statususer = response.getString("status");
-                    banner = response.getString("banner");
-                    inter=response.getString("inter");
+                    bannerfb = response.getString("bannerfb");
+                    interfb=response.getString("interfb");
+                    banneradmob = response.getString("banneradmob");
+                    interadmob=response.getString("interadmob");
                     apkupdate=response.getString("apkupdate");
                     statusapp=response.getString("statusapp");
+                    admobappid=response.getString("admobappid");
+
+
 
 
                     Button button= findViewById(R.id.startbutt);
@@ -625,6 +606,109 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
                 })
 
                 .show();
+    }
+
+    public  void interadmobload(){
+        MobileAds.initialize(this,
+                admobappid);
+        mInterstitialAd = new com.google.android.gms.ads.InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(interadmob);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mInterstitialAd.show();
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                pDialog.hide();
+
+                if (sharedPreferences.getBoolean(Variables.islogin, false)) {
+                    // if user is already login then we get the current location of user
+                    if(getIntent().hasExtra("action_type")){
+                        Intent intent= new Intent(Splash_A.this, MainMenuActivity.class);
+                        String action_type=getIntent().getExtras().getString("action_type");
+                        String receiverid=getIntent().getExtras().getString("senderid");
+                        String title=getIntent().getExtras().getString("title");
+                        String icon=getIntent().getExtras().getString("icon");
+
+                        intent.putExtra("icon",icon);
+                        intent.putExtra("action_type",action_type);
+                        intent.putExtra("receiverid",receiverid);
+                        intent.putExtra("title",title);
+
+
+                        startActivity(intent);
+                        finish();
+                    }
+                    else
+
+                        GPSStatus();
+
+                } else {
+                    // else we will move the user to login screen
+                    Intent intent= new Intent(Splash_A.this, Login_A.class);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                    startActivity(intent);
+                    finish();
+
+                }
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                pDialog.hide();
+                if (sharedPreferences.getBoolean(Variables.islogin, false)) {
+                    // if user is already login then we get the current location of user
+                    if(getIntent().hasExtra("action_type")){
+                        Intent intent= new Intent(Splash_A.this, MainMenuActivity.class);
+                        String action_type=getIntent().getExtras().getString("action_type");
+                        String receiverid=getIntent().getExtras().getString("senderid");
+                        String title=getIntent().getExtras().getString("title");
+                        String icon=getIntent().getExtras().getString("icon");
+
+                        intent.putExtra("icon",icon);
+                        intent.putExtra("action_type",action_type);
+                        intent.putExtra("receiverid",receiverid);
+                        intent.putExtra("title",title);
+
+
+                        startActivity(intent);
+                        finish();
+                    }
+                    else
+                        GPSStatus();
+                } else {
+                    // else we will move the user to login screen
+                    Intent intent= new Intent(Splash_A.this, Login_A.class);
+                    overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                    startActivity(intent);
+                    finish();
+
+                }
+                // Code to be executed when the interstitial ad is closed.
+            }
+        });
+
+
     }
 
 

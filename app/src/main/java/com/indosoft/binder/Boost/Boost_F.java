@@ -2,6 +2,7 @@ package com.indosoft.binder.Boost;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,6 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.indosoft.binder.Accounts.Login_A;
 import com.indosoft.binder.CodeClasses.ApiRequest;
 import com.indosoft.binder.CodeClasses.Callback;
 import com.indosoft.binder.CodeClasses.Functions;
@@ -33,6 +38,9 @@ import org.json.JSONObject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.indosoft.binder.Splash_A.admobappid;
+import static com.indosoft.binder.Splash_A.interadmob;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -46,6 +54,7 @@ public class Boost_F extends RootFragment implements View.OnClickListener {
     InterstitialAd interstitialAd;
     SweetAlertDialog pDialog;
 
+    com.google.android.gms.ads.InterstitialAd mInterstitialAd;
 
 
 
@@ -233,7 +242,7 @@ public class Boost_F extends RootFragment implements View.OnClickListener {
         pDialog.show();
 
 
-        interstitialAd = new InterstitialAd(context, Splash_A.inter);
+        interstitialAd = new InterstitialAd(context, Splash_A.interfb);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
             @Override
@@ -252,9 +261,7 @@ public class Boost_F extends RootFragment implements View.OnClickListener {
 
             @Override
             public void onError(Ad ad, AdError adError) {
-                pDialog.hide();
-
-                Call_Api_For_BoostProfile();
+                interadmobload();
 
                 // Ad error callback
                 Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
@@ -285,6 +292,57 @@ public class Boost_F extends RootFragment implements View.OnClickListener {
         // at least 30 seconds before it is shown
         interstitialAd.loadAd();
     }
+
+    public  void interadmobload(){
+        MobileAds.initialize(context,
+                admobappid);
+        mInterstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
+        mInterstitialAd.setAdUnitId(interadmob);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mInterstitialAd.show();
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                pDialog.hide();
+
+                pDialog.hide();
+
+                Call_Api_For_BoostProfile();
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                pDialog.hide();
+
+                Call_Api_For_BoostProfile();
+                // Code to be executed when the interstitial ad is closed.
+            }
+        });
+
+
+    }
+
 
 
 
